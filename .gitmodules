@@ -4,3 +4,6 @@
 [submodule "ilk-generator"]
 	path = ilk-generator
 	url = https://github.com/ESROCOS/ilk-generator.git
+[submodule "urdf2kindsl"]
+	path = urdf2kindsl
+	url = https://bitbucket.org/robcogenteam/urdf2kindsl.git
