@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rm -rf coverage_html_*
+
 ./coverage.sh fk1
 ./coverage.sh ik1
 ./coverage.sh ik2
