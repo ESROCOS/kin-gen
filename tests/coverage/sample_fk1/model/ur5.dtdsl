@@ -1,0 +1,11 @@
+Robot ur5
+
+Frames {
+    fr_base, fr_forearm, fr_wrist_3, fr_elbow
+}
+
+FK fk1 
+{
+    pose     : fr_wrist_3  wrt  fr_base
+}
+

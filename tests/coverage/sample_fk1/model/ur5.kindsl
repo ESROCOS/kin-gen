@@ -1,0 +1,167 @@
+Robot ur5
+{
+
+RobotBase base {
+    inertia_properties {
+        mass = 4.0
+        CoM = (0.000000,0.000000,0.025000)
+        Ix = 0.006930
+        Iy = 0.006930
+        Iz = 0.007200
+        Ixy = 0.000000
+        Ixz = 0.000000
+        Iyz = 0.000000
+    }
+    children {
+        shoulder via shoulder_pan
+    }
+ }
+
+link shoulder {
+    id = 1
+    inertia_properties {
+        mass = 3.7
+        CoM = (0.000000,0.001930,-0.025610)
+        Ix = 0.012710
+        Iy = 0.012690
+        Iz = 0.006670
+        Ixy = 0.000000
+        Ixz = -0.000000
+        Iyz = -0.000180
+    }
+    children {
+        upper_arm via shoulder_lift
+    }
+ }
+
+link upper_arm {
+    id = 2
+    inertia_properties {
+        mass = 8.393
+        CoM = (0.000000,-0.024200,0.212500)
+        Ix = 0.609370
+        Iy = 0.604450
+        Iz = 0.017150
+        Ixy = -0.000000
+        Ixz = 0.000000
+        Iyz = -0.043160
+    }
+    children {
+        forearm via elbow
+    }
+ }
+
+ link forearm {
+    id = 3
+    inertia_properties {
+        mass = 2.275
+        CoM = (0.000000,0.026500,0.119930)
+        Ix = 0.082630
+        Iy = 0.081030
+        Iz = 0.003420
+        Ixy = 0.000000
+        Ixz = 0.000000
+        Iyz = 0.007230
+    }
+    children {
+        wrist_1 via wr1
+    }
+ }
+
+ link wrist_1 {
+    id = 4
+    inertia_properties {
+        mass = 1.219
+        CoM = (0.000000,0.110950,0.016340)
+        Ix = 0.017410
+        Iy = 0.002410
+        Iz = 0.016240
+        Ixy = 0.000000
+        Ixz = 0.000000
+        Iyz = 0.002210
+    }
+    children {
+        wrist_2 via wr2
+    }
+ }
+
+link wrist_2 {
+    id = 5
+    inertia_properties {
+        mass = 1.219
+        CoM = (0.000000,0.001800,0.110990)
+        Ix = 0.017100
+        Iy = 0.017100
+        Iz = 0.001240
+        Ixy = 0.000000
+        Ixz = 0.000000
+        Iyz = 0.000240
+    }
+    children {
+        wrist_3 via wr3
+    }
+}
+
+link wrist_3 {
+    id = 6
+    inertia_properties {
+        mass = 0.1879
+        CoM = (0.000000,0.001160,0.000000)
+        Ix = 0.000320
+        Iy = 0.000320
+        Iz = 0.000190
+        Ixy = 0.000000
+        Ixz = 0.000000
+        Iyz = 0.000000
+    }
+    children {
+    }
+}
+
+
+r_joint shoulder_pan {
+    ref_frame {
+        translation = (0.0, 0.0, 0.089159)
+        rotation    = (0.0, 0.0, 0.0)
+    }
+}
+
+r_joint shoulder_lift {
+    ref_frame {
+        translation = (0.135850, 0.0, 0.0)
+        rotation    = (0.0, PI/2.0, PI) // the rotation about Z is to point the X axis "inside" the link
+    }
+}
+r_joint elbow {
+    ref_frame {
+        translation = (0.425, 0.0, -0.1197)
+        rotation    = (0.0, 0.0, 0.0)
+    }
+}
+
+r_joint wr1 {
+    ref_frame {
+        translation = (0.39225, 0.0, 0.09315)
+        rotation    = (0.0, 0.0, 0.0)
+    }
+}
+
+r_joint wr2 {
+    ref_frame {
+        translation = (0.09475, 0.0, 0.0)
+        rotation    = (0.0, PI/2.0, PI)
+    }
+}
+
+r_joint wr3 {
+    /* The origin of the frame is on the outermost surface of the disc (wrist3) */
+    /* Putting it on the contact surface with wrist2 would probably be more
+       intuitive, but the robot docs do not mention the required measures... */
+    ref_frame {
+        translation = (0.0825, 0.0, 0.0)
+        rotation    = (0.0, PI/2.0, 0.0)
+    }
+}
+
+}
+
