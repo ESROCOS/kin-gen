@@ -1,0 +1,30 @@
+Robot ur5
+
+Frames {
+    fr_base, fr_forearm, fr_wrist_3, fr_elbow
+}
+
+FK fk1 // replace 'fk1' with whatever name you like
+{
+    pose     : fr_wrist_3  wrt  fr_base
+    Jacobian : fr_wrist_3  wrt  fr_base
+    Jacobian : fr_wrist_3  wrt  fr_elbow
+}
+
+FK fk2
+{
+    //pose : fr_wrist_3  wrt  fr_base
+    pose : fr_forearm  wrt  fr_base
+}
+
+IKvel ik1
+{
+    vect  : linear
+    frames: fr_wrist_3 wrt fr_base
+}
+
+IKpos ik2
+{
+    vect  : pose
+    frames: fr_wrist_3 wrt fr_base
+}

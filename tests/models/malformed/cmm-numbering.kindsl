@@ -1,0 +1,120 @@
+Robot CMM_SCEE
+{
+
+
+RobotBase Wall {
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.0, 0.0, 0.0)
+		Iy=0.0	Ix=0.0	Ixy=0.0	Iz=0.0	Ixz=0.0	Iyz=0.0
+	}
+	children {
+		Body0 via Rail
+	}
+}
+
+link Body0 {
+	id = 1
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.5, .0, .0)
+		Ix=0.0025  Iy=0.33458  Iz=0.33458  Ixy=0.0  Ixz=0.0  Iyz=0.0
+	}
+
+	children {
+		LiftLink via Lift
+	}
+}
+
+link LiftLink {
+	id = 2
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.0, 0.0, 0.5)
+		Ix=0.33458  Iy=0.33458  Iz=0.0025  Ixy=0.0  Ixz=0.0  Iyz=0.0
+	}
+
+	children {
+		TiltLink via Tilt
+	}
+}
+
+link TiltLink {
+
+
+	id = 30  // !! wrong link id, should be 3
+
+
+
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.5, .0, .0)
+		Ix=0.0025  Iy=0.33458  Iz=0.33458  Ixy=0.0  Ixz=0.0  Iyz=0.0
+	}
+
+	children {
+		CROLink via CRO
+	}
+}
+
+link CROLink {
+	id = 4
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.0, 0.0, 0.5)
+		Ix=0.33458  Iy=0.33458  Iz=0.0025  Ixy=0.0  Ixz=0.0  Iyz=0.0
+	}
+
+	children {
+		HROLink via HRO
+	}
+}
+
+link HROLink {
+	id = 5
+	inertia_properties {
+		mass = 1.0
+		CoM = (0.5, .0, .0)
+		Ix=0.0025  Iy=0.33458  Iz=0.33458  Ixy=0.0  Ixz=0.0  Iyz=0.0
+	}
+
+	children {}
+}
+
+p_joint Rail {
+	ref_frame {
+		translation = (0.0, 0.0, 0.0)
+		rotation = (PI, PI / 2.0, 0.0)
+	}
+}
+
+r_joint Lift {
+	ref_frame {
+		translation = (0.0, 0.0, 0.0)
+		rotation = (-PI/2.0, 0.0, 0.0)
+	}
+}
+
+r_joint Tilt {
+	ref_frame {
+		translation = (0.0, -1.202, 0.0)
+		rotation = (0.0, 0.0, PI / 2.0)
+	}
+}
+
+r_joint CRO {
+	ref_frame {
+		translation = (-0.6124, 0.55225, 0.0)
+		rotation = (PI/2.0, -0.087266, 0.0)
+	}
+}
+
+r_joint HRO {
+	ref_frame {
+		translation = (-0.94919, 0.0, 0.280)
+		rotation = (0.0, 0.0, 0.0)
+	}
+}
+
+
+}
