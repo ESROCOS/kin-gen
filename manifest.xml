@@ -1,0 +1,10 @@
+<package>
+    <description brief="The kinematics code generator tool">
+
+    </description>
+    <author>Marco Frigerio, Enea Scioni, Pawel Piotr Pazderski</author>
+    <depend package="java" />
+    <depend package="ant" />
+    <depend package="ivy" />
+    <depend package="lua" />
+</package>
