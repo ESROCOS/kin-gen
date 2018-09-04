@@ -16,4 +16,5 @@ add_custom_target(localbuild ALL
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/ilk-generator
 )
 
+install(CODE "MESSAGE(\"Kin-gen installation...\")" )
 
