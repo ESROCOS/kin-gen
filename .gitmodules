@@ -7,3 +7,6 @@
 [submodule "urdf2kindsl"]
 	path = urdf2kindsl
 	url = https://bitbucket.org/robcogenteam/urdf2kindsl.git
+[submodule "dconv"]
+	path = dconv
+	url = https://github.com/haianos/dconv-tool.git
