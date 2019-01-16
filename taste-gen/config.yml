@@ -1,0 +1,13 @@
+block_name: 'kinsolver'
+robot_name: 'ur5'
+solver_filename: 'ur5'
+solver_functions:
+- function_name: 'fk1'
+- function_name: 'fk2'
+output_directory: '/tmp/kin-gen/taste/'
+interface_type: 'nonsporadic'
+solver_library_name: 'libur5.so'
+solver_library_location: '/usr/local/lib/'
+bridge_library_name: 'libkinsolverbridge.a'
+model_constants: |
+      // initialize model constants

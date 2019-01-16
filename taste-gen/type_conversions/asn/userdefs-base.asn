@@ -1,0 +1,223 @@
+UserDefs-Base-Types DEFINITIONS ::=
+BEGIN
+
+IMPORTS T-UInt32 FROM TASTE-BasicTypes;
+
+--Definition DummyBase-T starts
+    DummyBase-T ::= T-UInt32
+-- Definition DummyBase-T ends
+
+--Definition numBase-JointTrajectory starts
+    numBase-JointTrajectory	T-UInt32 ::= 200 
+-- Definition numBase-JointTrajectory ends
+
+--Definition numStd-orogen-typekits-mtype-std-vector-base-JointTransform starts
+    numStd-orogen-typekits-mtype-std-vector-base-JointTransform	T-UInt32 ::= 200 
+-- Definition numStd-orogen-typekits-mtype-std-vector-base-JointTransform ends
+
+--Definition numStd-orogen-typekits-mtype-std-vector-base-Waypoint starts
+    numStd-orogen-typekits-mtype-std-vector-base-Waypoint	T-UInt32 ::= 200 
+-- Definition numStd-orogen-typekits-mtype-std-vector-base-Waypoint ends
+
+--Definition numStd-orogen-typekits-mtype-std-vector-base-Wrench starts
+    numStd-orogen-typekits-mtype-std-vector-base-Wrench	T-UInt32 ::= 200 
+-- Definition numStd-orogen-typekits-mtype-std-vector-base-Wrench ends
+
+--Definition numStd-vector-Wrappers-Vector4d starts
+    numStd-vector-Wrappers-Vector4d	T-UInt32 ::= 200 
+-- Definition numStd-vector-Wrappers-Vector4d ends
+
+--Definition numStd-orogen-typekits-mtype-std-vector-base-Trajectory starts
+    numStd-orogen-typekits-mtype-std-vector-base-Trajectory	T-UInt32 ::= 200 
+-- Definition numStd-orogen-typekits-mtype-std-vector-base-Trajectory ends
+
+--Definition numBase-JointLimits-names starts
+    numBase-JointLimits-names	T-UInt32 ::= 200 
+-- Definition numBase-JointLimits-names ends
+
+--Definition numBase-JointLimits-elements starts
+    numBase-JointLimits-elements	T-UInt32 ::= 200 
+-- Definition numBase-JointLimits-elements ends
+
+--Definition numBase-JointsTrajectory-names starts
+    numBase-JointsTrajectory-names	T-UInt32 ::= 200 
+-- Definition numBase-JointsTrajectory-names ends
+
+--Definition numBase-JointsTrajectory-elements starts
+    numBase-JointsTrajectory-elements	T-UInt32 ::= 200 
+-- Definition numBase-JointsTrajectory-elements ends
+
+--Definition numBase-JointsTrajectory-times-val starts
+    numBase-JointsTrajectory-times-val	T-UInt32 ::= 200 
+-- Definition numBase-JointsTrajectory-times-val ends
+
+--Definition numBase-NamedVector-Base-JointLimitRange-names starts
+    numBase-NamedVector-Base-JointLimitRange-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointLimitRange-names ends
+
+--Definition numBase-NamedVector-Base-JointLimitRange-elements starts
+    numBase-NamedVector-Base-JointLimitRange-elements	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointLimitRange-elements ends
+
+--Definition numBase-NamedVector-Base-JointState-names starts
+    numBase-NamedVector-Base-JointState-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointState-names ends
+
+--Definition numBase-NamedVector-Base-Wrench-names starts
+    numBase-NamedVector-Base-Wrench-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-Wrench-names ends
+
+--Definition numBase-NamedVector-Base-Wrench-elements starts
+    numBase-NamedVector-Base-Wrench-elements	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-Wrench-elements ends
+
+--Definition numBase-NamedVector-Base-JointTrajectory-names starts
+    numBase-NamedVector-Base-JointTrajectory-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointTrajectory-names ends
+
+--Definition numBase-NamedVector-Base-JointTrajectory-elements starts
+    numBase-NamedVector-Base-JointTrajectory-elements	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointTrajectory-elements ends
+
+--Definition numBase-samples-DepthMap-timestamps starts
+    numBase-samples-DepthMap-timestamps	T-UInt32 ::= 200 
+-- Definition numBase-samples-DepthMap-timestamps ends
+
+--Definition numBase-samples-DepthMap-vertical-interval starts
+    numBase-samples-DepthMap-vertical-interval	T-UInt32 ::= 200 
+-- Definition numBase-samples-DepthMap-vertical-interval ends
+
+--Definition numBase-samples-DepthMap-horizontal-interval starts
+    numBase-samples-DepthMap-horizontal-interval	T-UInt32 ::= 200 
+-- Definition numBase-samples-DepthMap-horizontal-interval ends
+
+--Definition numBase-samples-DepthMap-distances starts
+    numBase-samples-DepthMap-distances	T-UInt32 ::= 200 
+-- Definition numBase-samples-DepthMap-distances ends
+
+--Definition numBase-samples-DepthMap-remissions starts
+    numBase-samples-DepthMap-remissions	T-UInt32 ::= 200 
+-- Definition numBase-samples-DepthMap-remissions ends
+
+--Definition numBase-samples-DistanceImage-data starts
+    numBase-samples-DistanceImage-data	T-UInt32 ::= 200 
+-- Definition numBase-samples-DistanceImage-data ends
+
+--Definition numBase-commands-Joints-names starts
+    numBase-commands-Joints-names	T-UInt32 ::= 200 
+-- Definition numBase-commands-Joints-names ends
+
+--Definition numBase-samples-LaserScan-ranges starts
+    numBase-samples-LaserScan-ranges	T-UInt32 ::= 200 
+-- Definition numBase-samples-LaserScan-ranges ends
+
+--Definition numBase-samples-LaserScan-remission starts
+    numBase-samples-LaserScan-remission	T-UInt32 ::= 200 
+-- Definition numBase-samples-LaserScan-remission ends
+
+--Definition numBase-samples-Pointcloud-points starts
+    numBase-samples-Pointcloud-points	T-UInt32 ::= 200 
+-- Definition numBase-samples-Pointcloud-points ends
+
+--Definition numBase-samples-Pointcloud-colors starts
+    numBase-samples-Pointcloud-colors	T-UInt32 ::= 200 
+-- Definition numBase-samples-Pointcloud-colors ends
+
+--Definition numBase-samples-Sonar-timestamps starts
+    numBase-samples-Sonar-timestamps	T-UInt32 ::= 200 
+-- Definition numBase-samples-Sonar-timestamps ends
+
+--Definition numBase-samples-Sonar-bearings starts
+    numBase-samples-Sonar-bearings	T-UInt32 ::= 200 
+-- Definition numBase-samples-Sonar-bearings ends
+
+--Definition numBase-samples-Sonar-bins starts
+    numBase-samples-Sonar-bins	T-UInt32 ::= 200 
+-- Definition numBase-samples-Sonar-bins ends
+
+--Definition numBase-samples-SonarBeam-beam starts
+    numBase-samples-SonarBeam-beam	T-UInt32 ::= 200 
+-- Definition numBase-samples-SonarBeam-beam ends
+
+--Definition numBase-samples-SonarScan-data starts
+    numBase-samples-SonarScan-data	T-UInt32 ::= 200 
+-- Definition numBase-samples-SonarScan-data ends
+
+--Definition numBase-samples-SonarScan-time-beams starts
+    numBase-samples-SonarScan-time-beams	T-UInt32 ::= 200 
+-- Definition numBase-samples-SonarScan-time-beams ends
+
+--Definition numBase-samples-Wrenches-names starts
+    numBase-samples-Wrenches-names	T-UInt32 ::= 200 
+-- Definition numBase-samples-Wrenches-names ends
+
+--Definition numBase-samples-Wrenches-elements starts
+    numBase-samples-Wrenches-elements	T-UInt32 ::= 200 
+-- Definition numBase-samples-Wrenches-elements ends
+
+--Definition numBase-JointTransformVector-names starts
+    numBase-JointTransformVector-names	T-UInt32 ::= 200 
+-- Definition numBase-JointTransformVector-names ends
+
+--Definition numBase-JointTransformVector-elements starts
+    numBase-JointTransformVector-elements	T-UInt32 ::= 200 
+-- Definition numBase-JointTransformVector-elements ends
+
+--Definition numBase-NamedVector-Base-JointTransform-names starts
+    numBase-NamedVector-Base-JointTransform-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointTransform-names ends
+
+--Definition numBase-NamedVector-Base-JointTransform-elements starts
+    numBase-NamedVector-Base-JointTransform-elements	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-Base-JointTransform-elements ends
+
+--Definition numBase-samples-frame-Frame-image starts
+    numBase-samples-frame-Frame-image	T-UInt32 ::= 200 
+-- Definition numBase-samples-frame-Frame-image ends
+
+--Definition numBase-samples-frame-Frame-attributes starts
+    numBase-samples-frame-Frame-attributes	T-UInt32 ::= 200 
+-- Definition numBase-samples-frame-Frame-attributes ends
+
+--Definition numWrappers-MatrixXd-data starts
+    numWrappers-MatrixXd-data	T-UInt32 ::= 200 
+-- Definition numWrappers-MatrixXd-data ends
+
+--Definition numWrappers-VectorXd-data starts
+    numWrappers-VectorXd-data	T-UInt32 ::= 200 
+-- Definition numWrappers-VectorXd-data ends
+
+--Definition numBase-JointTransformVector-m-names starts
+    numBase-JointTransformVector-m-names	T-UInt32 ::= 200 
+-- Definition numBase-JointTransformVector-m-names ends
+
+--Definition numBase-NamedVector-base-JointTransform-m-names starts
+    numBase-NamedVector-base-JointTransform-m-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-base-JointTransform-m-names ends
+
+--Definition numBase-NamedVector-base-Wrench-m-names starts
+    numBase-NamedVector-base-Wrench-m-names	T-UInt32 ::= 200 
+-- Definition numBase-NamedVector-base-Wrench-m-names ends
+
+--Definition numBase-samples-Pointcloud-m-points starts
+    numBase-samples-Pointcloud-m-points	T-UInt32 ::= 200 
+-- Definition numBase-samples-Pointcloud-m-points ends
+
+--Definition numBase-samples-Pointcloud-m-colors starts
+    numBase-samples-Pointcloud-m-colors	T-UInt32 ::= 200 
+-- Definition numBase-samples-Pointcloud-m-colors ends
+
+--Definition numBase-samples-Wrenches-m-names starts
+    numBase-samples-Wrenches-m-names	T-UInt32 ::= 200 
+-- Definition numBase-samples-Wrenches-m-names ends
+
+--Definition numWrappers-geometry-Spline-knots starts
+    numWrappers-geometry-Spline-knots	T-UInt32 ::= 200 
+-- Definition numWrappers-geometry-Spline-knots ends
+
+--Definition numWrappers-geometry-Spline-vertices starts
+    numWrappers-geometry-Spline-vertices	T-UInt32 ::= 200 
+-- Definition numWrappers-geometry-Spline-vertices ends
+
+
+END

@@ -1,0 +1,28 @@
+Base-Types DEFINITIONS ::=
+BEGIN
+
+IMPORTS T-UInt32, T-Boolean, T-Int32 FROM TASTE-BasicTypes T-Double, T-Float, T-Int64, T-UInt16, T-String FROM TASTE-ExtendedTypes;
+
+-- Minimal for testing Pose conversion
+
+--Definition Wrappers-Vector3d starts
+Wrappers-Vector3d ::= SEQUENCE
+{
+    data  SEQUENCE(SIZE(1 .. 3)) OF T-Double
+}
+
+--Definition Quaterniond starts
+Quaterniond ::= SEQUENCE
+{
+    im  SEQUENCE(SIZE(1 .. 3)) OF T-Double,
+    re  T-Double
+}
+
+--Definition Base-Pose starts
+Base-Pose ::= SEQUENCE
+{
+    position  Wrappers-Vector3d,
+    orientation  Wrappers-Quaterniond
+}
+
+END

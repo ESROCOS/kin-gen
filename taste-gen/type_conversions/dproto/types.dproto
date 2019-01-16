@@ -1,0 +1,89 @@
+//ddr definitions
+ddr eigen_v31 :: Eigen{Matrix<3,1>}
+ddr eigen_m33 :: Eigen{Matrix<3,3>}
+
+//Algebraic definitions
+algebraic position3_named :: Scalar{x,y,z}
+algebraic orient_rot_mx   :: Matrix{3,3}
+algebraic quat_named      :: Scalar{x,y,z,w}
+
+// Position
+dproto vector3_t :: geometry {
+  semantic  = Position
+  coord     = cartesian
+  algebraic = position3_named
+  ddr       = eigen_v31
+  dr = {
+    {0,0} = x, {1,0} = y, {2,0} = z
+  }
+}
+
+dproto asn1SccWrappers_Vector3d :: geometry {
+  semantic  = Position
+  coord     = cartesian
+  algebraic = position3_named
+  ddr       = :: ASN1 {Base-Types.Wrappers-Vector3d}
+  dr = {0=x, 1=y, 2=z}
+}
+
+
+
+
+// Orientation
+dproto rot_m_t :: geometry {
+  semantic  = Orientation
+  coord     = rot_matrix
+  algebraic = orient_rot_mx
+  ddr       = eigen_m33
+  dr = {
+    {0,0} = {0,0}, {0,1} = {0,1}, {0,2} = {0,2},
+    {1,0} = {1,0}, {1,1} = {1,1}, {1,2} = {1,2},
+    {2,0} = {2,0}, {2,1} = {2,1}, {2,2} = {2,2}
+  }
+}
+
+dproto asn1SccWrappers_Quaterniond :: geometry {
+  semantic   = Orientation
+  coord      = quaternion
+  algebraic  = quat_named
+  ddr        = :: ASN1 {Base-Types.Quaterniond}
+  dr = {re=w, im.0=x, im.1=y, im.2=z}
+}
+
+dproto QuaternionTemp :: geometry
+{
+  semantic   = Orientation
+  coord      = quaternion
+  algebraic  = quat_named
+  ddr        = :: c99 {double[4]}
+  dr = {0=w, 1=x, 2=y, 3=z}
+}
+
+
+conversion QuaternionTemp -> rot_m_t     = quat2rot
+conversion rot_m_t    -> QuaternionTemp  = rot2quat
+
+// Pose definitions
+dproto asn1SccBase_Pose :: geometry {
+  semantic = Pose
+  composes = {
+    Position    = asn1SccWrappers_Vector3d
+    Orientation = asn1SccWrappers_Quaterniond
+  }
+  dr = {
+    orientation = Orientation
+    position    = Position
+  }
+}
+
+dproto pose_t :: geometry {
+  semantic = Pose
+  composes  = {
+    Position    = vector3_t
+    Orientation = rot_m_t
+  }
+  dr = {
+    position    = Position
+    orientation = Orientation
+  }
+}

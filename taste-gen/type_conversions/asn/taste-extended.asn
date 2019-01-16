@@ -1,0 +1,34 @@
+TASTE-ExtendedTypes DEFINITIONS ::=
+BEGIN
+
+IMPORTS 
+T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean  FROM TASTE-BasicTypes;
+
+-- Set of TASTE predefined basic types
+
+T-Double ::= REAL (-1.7976931348623157e+308 .. 1.7976931348623157E308)
+
+T-Float ::= REAL (-3.402823466E+38 .. 3.402823466e+38)
+
+T-Int16 ::= INTEGER (-32768 .. 32767 )
+
+T-UInt16 ::= INTEGER (0 .. 65535 )
+
+T-UInt64 ::= INTEGER (0 .. 9223372036854775807)
+
+T-Int64 ::= INTEGER (-9223372036854775807 .. 9223372036854775807)
+
+T-String ::= T-StringP{numT-String}
+
+T-StringP{T-UInt32: maxT-String} ::= OCTET STRING (SIZE(0 .. maxT-String))
+
+numT-String T-UInt32::= 60
+
+T-Time ::= SEQUENCE
+{
+    secs  T-UInt32,
+    nsecs T-UInt32
+}
+  
+END
+

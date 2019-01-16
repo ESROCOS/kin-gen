@@ -1,0 +1,452 @@
+---
+ik1:
+  olist_without_jacobians: {}
+  type: inverse
+  solver_name: ik1
+  ops:
+    outputs: {}
+    robot_name: ur5
+    solver_id: ik1
+    type: inverse
+    identifiers:
+      fr_base: fr_base
+      fr_wrist_3: fr_wrist_3
+    ik:
+      reference: fr_base
+      kind: vel
+      vectors: linear
+      fk: fk__ik1
+      target: fr_wrist_3
+      op: ik
+  olist: {}
+ik2:
+  olist_without_jacobians: {}
+  type: inverse
+  solver_name: ik2
+  ops:
+    outputs: {}
+    robot_name: ur5
+    solver_id: ik2
+    type: inverse
+    identifiers:
+      fr_base: fr_base
+      fr_wrist_3: fr_wrist_3
+    ik:
+      reference: fr_base
+      kind: pos
+      vectors: pose
+      fk: fk__ik1
+      target: fr_wrist_3
+      op: ik
+  olist: {}
+fk__ik1:
+  olist_without_jacobians:
+  - &0
+    - kul::pose_t
+    - fr_wrist_3__fr_base
+  type: forward
+  solver_name: fk__ik1
+  ops:
+    robot_name: ur5
+    j_computes:
+    - joint_pose: fr_shoulder_pan__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 0
+      op: GJac-col
+    - joint_pose: fr_shoulder_lift__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 1
+      op: GJac-col
+    - joint_pose: fr_elbow__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 2
+      op: GJac-col
+    - joint_pose: fr_wr1__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 3
+      op: GJac-col
+    - joint_pose: fr_wr2__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 4
+      op: GJac-col
+    - joint_pose: fr_wr3__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 5
+      op: GJac-col
+    m_joint_local:
+    - input: 5
+      jtype: revolute
+      name: fr_wrist_3__fr_wr3
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 4
+      jtype: revolute
+      name: fr_wrist_2__fr_wr2
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 3
+      jtype: revolute
+      name: fr_wrist_1__fr_wr1
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 2
+      jtype: revolute
+      name: fr_forearm__fr_elbow
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 1
+      jtype: revolute
+      name: fr_upper_arm__fr_shoulder_lift
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 0
+      jtype: revolute
+      name: fr_shoulder__fr_shoulder_pan
+      dir: a_x_b
+      op: model_T_joint_local
+    outputs:
+    - target: fr_wrist_3__fr_base
+      otype: pose
+      op: output
+    - target: J_fr_wrist_3_fr_base
+      otype: jacobian
+      op: output
+    jacobians:
+    - name: J_fr_wrist_3_fr_base
+      pose: fr_wrist_3__fr_base
+      op: geom-jacobian
+    solver_id: fk__ik1
+    type: forward
+    identifiers:
+      fr_wrist_2__fr_wr2: fr_wrist_2__fr_wr2
+      fr_upper_arm__fr_shoulder_lift: fr_upper_arm__fr_shoulder_lift
+      fr_wr2__fr_base: fr_wr2__fr_base
+      fr_shoulder_lift__fr_base: fr_shoulder_lift__fr_base
+      fr_wrist_1__fr_wr1: fr_wrist_1__fr_wr1
+      fr_wr1__fr_elbow: fr_wr1__fr_elbow
+      fr_wr2__fr_wrist_1: mc.fr_wr2__fr_wrist_1
+      fr_wr1__fr_forearm: mc.fr_wr1__fr_forearm
+      fr_shoulder_lift__fr_shoulder: mc.fr_shoulder_lift__fr_shoulder
+      fr_forearm__fr_elbow: fr_forearm__fr_elbow
+      J_fr_wrist_3_fr_base: J_fr_wrist_3_fr_base
+      fr_wrist_3__fr_base: fr_wrist_3__fr_base
+      fr_wr3__fr_base: fr_wr3__fr_base
+      fr_elbow__fr_shoulder_lift: fr_elbow__fr_shoulder_lift
+      fr_elbow__fr_base: fr_elbow__fr_base
+      fr_shoulder__fr_shoulder_pan: fr_shoulder__fr_shoulder_pan
+      fr_wr2__fr_wr1: fr_wr2__fr_wr1
+      fr_wr1__fr_base: fr_wr1__fr_base
+      fr_shoulder_pan__fr_base: mc.fr_shoulder_pan__fr_base
+      fr_wr3__fr_wr2: fr_wr3__fr_wr2
+      fr_wr3__fr_wrist_2: mc.fr_wr3__fr_wrist_2
+      fr_shoulder_lift__fr_shoulder_pan: fr_shoulder_lift__fr_shoulder_pan
+      fr_elbow__fr_upper_arm: mc.fr_elbow__fr_upper_arm
+      fr_wrist_3__fr_wr3: fr_wrist_3__fr_wr3
+    compose:
+    - - fr_shoulder_lift__fr_shoulder
+      - fr_shoulder__fr_shoulder_pan
+      - fr_shoulder_lift__fr_shoulder_pan
+    - - fr_shoulder_lift__fr_shoulder_pan
+      - fr_shoulder_pan__fr_base
+      - fr_shoulder_lift__fr_base
+    - - fr_elbow__fr_upper_arm
+      - fr_upper_arm__fr_shoulder_lift
+      - fr_elbow__fr_shoulder_lift
+    - - fr_elbow__fr_shoulder_lift
+      - fr_shoulder_lift__fr_base
+      - fr_elbow__fr_base
+    - - fr_wr1__fr_forearm
+      - fr_forearm__fr_elbow
+      - fr_wr1__fr_elbow
+    - - fr_wr1__fr_elbow
+      - fr_elbow__fr_base
+      - fr_wr1__fr_base
+    - - fr_wr2__fr_wrist_1
+      - fr_wrist_1__fr_wr1
+      - fr_wr2__fr_wr1
+    - - fr_wr2__fr_wr1
+      - fr_wr1__fr_base
+      - fr_wr2__fr_base
+    - - fr_wr3__fr_wrist_2
+      - fr_wrist_2__fr_wr2
+      - fr_wr3__fr_wr2
+    - - fr_wr3__fr_wr2
+      - fr_wr2__fr_base
+      - fr_wr3__fr_base
+    - - fr_wrist_3__fr_wr3
+      - fr_wr3__fr_base
+      - fr_wrist_3__fr_base
+    model_const:
+    - fr_wr3__fr_wrist_2
+    - fr_wr2__fr_wrist_1
+    - fr_wr1__fr_forearm
+    - fr_elbow__fr_upper_arm
+    - fr_shoulder_lift__fr_shoulder
+    - fr_shoulder_pan__fr_base
+  olist:
+  - *0
+  - - ur5::t_J_fr_wrist_3_fr_base
+    - J_fr_wrist_3_fr_base
+fk2:
+  olist_without_jacobians:
+  - &1
+    - kul::pose_t
+    - fr_forearm__fr_base
+  type: forward
+  solver_name: fk2
+  ops:
+    robot_name: ur5
+    j_computes: {}
+    m_joint_local:
+    - input: 2
+      jtype: revolute
+      name: fr_forearm__fr_elbow
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 1
+      jtype: revolute
+      name: fr_upper_arm__fr_shoulder_lift
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 0
+      jtype: revolute
+      name: fr_shoulder__fr_shoulder_pan
+      dir: a_x_b
+      op: model_T_joint_local
+    outputs:
+    - target: fr_forearm__fr_base
+      otype: pose
+      op: output
+    jacobians: {}
+    solver_id: fk2
+    type: forward
+    identifiers:
+      fr_forearm__fr_elbow: fr_forearm__fr_elbow
+      fr_forearm__fr_shoulder: fr_forearm__fr_shoulder
+      fr_upper_arm__fr_shoulder_lift: fr_upper_arm__fr_shoulder_lift
+      fr_forearm__fr_shoulder_pan: fr_forearm__fr_shoulder_pan
+      fr_shoulder__fr_shoulder_pan: fr_shoulder__fr_shoulder_pan
+      fr_forearm__fr_upper_arm: fr_forearm__fr_upper_arm
+      fr_forearm__fr_shoulder_lift: fr_forearm__fr_shoulder_lift
+      fr_shoulder_pan__fr_base: mc.fr_shoulder_pan__fr_base
+      fr_forearm__fr_base: fr_forearm__fr_base
+      fr_shoulder_lift__fr_shoulder: mc.fr_shoulder_lift__fr_shoulder
+      fr_elbow__fr_upper_arm: mc.fr_elbow__fr_upper_arm
+    compose:
+    - - fr_forearm__fr_elbow
+      - fr_elbow__fr_upper_arm
+      - fr_forearm__fr_upper_arm
+    - - fr_forearm__fr_upper_arm
+      - fr_upper_arm__fr_shoulder_lift
+      - fr_forearm__fr_shoulder_lift
+    - - fr_forearm__fr_shoulder_lift
+      - fr_shoulder_lift__fr_shoulder
+      - fr_forearm__fr_shoulder
+    - - fr_forearm__fr_shoulder
+      - fr_shoulder__fr_shoulder_pan
+      - fr_forearm__fr_shoulder_pan
+    - - fr_forearm__fr_shoulder_pan
+      - fr_shoulder_pan__fr_base
+      - fr_forearm__fr_base
+    model_const:
+    - fr_elbow__fr_upper_arm
+    - fr_shoulder_lift__fr_shoulder
+    - fr_shoulder_pan__fr_base
+  olist:
+  - *1
+fk1:
+  olist_without_jacobians:
+  - &2
+    - kul::pose_t
+    - fr_wrist_3__fr_base
+  type: forward
+  solver_name: fk1
+  ops:
+    robot_name: ur5
+    j_computes:
+    - joint_pose: fr_shoulder_pan__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 0
+      op: GJac-col
+    - joint_pose: fr_shoulder_lift__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 1
+      op: GJac-col
+    - joint_pose: fr_elbow__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 2
+      op: GJac-col
+    - joint_pose: fr_wr1__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 3
+      op: GJac-col
+    - joint_pose: fr_wr2__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 4
+      op: GJac-col
+    - joint_pose: fr_wr3__fr_base
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_base
+      col: 5
+      op: GJac-col
+    - joint_pose: fr_wr1__fr_elbow
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_elbow
+      col: 3
+      op: GJac-col
+    - joint_pose: fr_wr2__fr_elbow
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_elbow
+      col: 4
+      op: GJac-col
+    - joint_pose: fr_wr3__fr_elbow
+      jtype: revolute
+      jac: J_fr_wrist_3_fr_elbow
+      col: 5
+      op: GJac-col
+    m_joint_local:
+    - input: 5
+      jtype: revolute
+      name: fr_wrist_3__fr_wr3
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 4
+      jtype: revolute
+      name: fr_wrist_2__fr_wr2
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 3
+      jtype: revolute
+      name: fr_wrist_1__fr_wr1
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 2
+      jtype: revolute
+      name: fr_forearm__fr_elbow
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 1
+      jtype: revolute
+      name: fr_upper_arm__fr_shoulder_lift
+      dir: a_x_b
+      op: model_T_joint_local
+    - input: 0
+      jtype: revolute
+      name: fr_shoulder__fr_shoulder_pan
+      dir: a_x_b
+      op: model_T_joint_local
+    outputs:
+    - target: fr_wrist_3__fr_base
+      otype: pose
+      op: output
+    - target: J_fr_wrist_3_fr_base
+      otype: jacobian
+      op: output
+    - target: J_fr_wrist_3_fr_elbow
+      otype: jacobian
+      op: output
+    jacobians:
+    - name: J_fr_wrist_3_fr_base
+      pose: fr_wrist_3__fr_base
+      op: geom-jacobian
+    - name: J_fr_wrist_3_fr_elbow
+      pose: fr_wrist_3__fr_elbow
+      op: geom-jacobian
+    solver_id: fk1
+    type: forward
+    identifiers:
+      fr_wrist_2__fr_wr2: fr_wrist_2__fr_wr2
+      fr_upper_arm__fr_shoulder_lift: fr_upper_arm__fr_shoulder_lift
+      fr_wr2__fr_base: fr_wr2__fr_base
+      fr_shoulder_lift__fr_base: fr_shoulder_lift__fr_base
+      fr_wrist_1__fr_wr1: fr_wrist_1__fr_wr1
+      fr_wr1__fr_elbow: fr_wr1__fr_elbow
+      fr_wr2__fr_wrist_1: mc.fr_wr2__fr_wrist_1
+      J_fr_wrist_3_fr_elbow: J_fr_wrist_3_fr_elbow
+      fr_wr1__fr_forearm: mc.fr_wr1__fr_forearm
+      fr_shoulder_lift__fr_shoulder: mc.fr_shoulder_lift__fr_shoulder
+      fr_wrist_3__fr_elbow: fr_wrist_3__fr_elbow
+      J_fr_wrist_3_fr_base: J_fr_wrist_3_fr_base
+      fr_forearm__fr_elbow: fr_forearm__fr_elbow
+      fr_wr3__fr_elbow: fr_wr3__fr_elbow
+      fr_wr2__fr_elbow: fr_wr2__fr_elbow
+      fr_wrist_3__fr_base: fr_wrist_3__fr_base
+      fr_wr3__fr_base: fr_wr3__fr_base
+      fr_elbow__fr_shoulder_lift: fr_elbow__fr_shoulder_lift
+      fr_elbow__fr_base: fr_elbow__fr_base
+      fr_shoulder__fr_shoulder_pan: fr_shoulder__fr_shoulder_pan
+      fr_wr2__fr_wr1: fr_wr2__fr_wr1
+      fr_wr1__fr_base: fr_wr1__fr_base
+      fr_shoulder_pan__fr_base: mc.fr_shoulder_pan__fr_base
+      fr_wr3__fr_wr2: fr_wr3__fr_wr2
+      fr_wr3__fr_wrist_2: mc.fr_wr3__fr_wrist_2
+      fr_shoulder_lift__fr_shoulder_pan: fr_shoulder_lift__fr_shoulder_pan
+      fr_elbow__fr_upper_arm: mc.fr_elbow__fr_upper_arm
+      fr_wrist_3__fr_wr3: fr_wrist_3__fr_wr3
+    compose:
+    - - fr_shoulder_lift__fr_shoulder
+      - fr_shoulder__fr_shoulder_pan
+      - fr_shoulder_lift__fr_shoulder_pan
+    - - fr_shoulder_lift__fr_shoulder_pan
+      - fr_shoulder_pan__fr_base
+      - fr_shoulder_lift__fr_base
+    - - fr_elbow__fr_upper_arm
+      - fr_upper_arm__fr_shoulder_lift
+      - fr_elbow__fr_shoulder_lift
+    - - fr_elbow__fr_shoulder_lift
+      - fr_shoulder_lift__fr_base
+      - fr_elbow__fr_base
+    - - fr_wr1__fr_forearm
+      - fr_forearm__fr_elbow
+      - fr_wr1__fr_elbow
+    - - fr_wr1__fr_elbow
+      - fr_elbow__fr_base
+      - fr_wr1__fr_base
+    - - fr_wr2__fr_wrist_1
+      - fr_wrist_1__fr_wr1
+      - fr_wr2__fr_wr1
+    - - fr_wr2__fr_wr1
+      - fr_wr1__fr_base
+      - fr_wr2__fr_base
+    - - fr_wr3__fr_wrist_2
+      - fr_wrist_2__fr_wr2
+      - fr_wr3__fr_wr2
+    - - fr_wr3__fr_wr2
+      - fr_wr2__fr_base
+      - fr_wr3__fr_base
+    - - fr_wrist_3__fr_wr3
+      - fr_wr3__fr_base
+      - fr_wrist_3__fr_base
+    - - fr_wr2__fr_wr1
+      - fr_wr1__fr_elbow
+      - fr_wr2__fr_elbow
+    - - fr_wr3__fr_wr2
+      - fr_wr2__fr_elbow
+      - fr_wr3__fr_elbow
+    - - fr_wrist_3__fr_wr3
+      - fr_wr3__fr_elbow
+      - fr_wrist_3__fr_elbow
+    model_const:
+    - fr_wr3__fr_wrist_2
+    - fr_wr2__fr_wrist_1
+    - fr_wr1__fr_forearm
+    - fr_elbow__fr_upper_arm
+    - fr_shoulder_lift__fr_shoulder
+    - fr_shoulder_pan__fr_base
+  olist:
+  - *2
+  - - ur5::t_J_fr_wrist_3_fr_base
+    - J_fr_wrist_3_fr_base
+  - - ur5::t_J_fr_wrist_3_fr_elbow
+    - J_fr_wrist_3_fr_elbow
