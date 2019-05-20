@@ -8,14 +8,14 @@ local variables = require('variable_names')
 local function generate_inputs(metadata)
     local result_decl = ''
     local result_call = ''
-    if metadata.ops.type == ilk_keywords.solver_type.forward then
+    if metadata.type == ilk_keywords.solver_type.forward then
         result_decl = 'const '.. asn1_types.joint_state ..' *'..variables.input.joint_state
         result_call = variables.input.joint_state
-    elseif metadata.ops.type == ilk_keywords.solver_type.inverse then
-        if metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
+    elseif metadata.type == ilk_keywords.solver_type.inverse then
+        if metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
             result_decl = 'const '.. asn1_types.vector_3d ..' *'..variables.input.position..', const '.. asn1_types.rot_m_t ..'*'..variables.input.orientation..', ' .. asn1_types.joint_state ..'*'..variables.input.guess
             result_call = variables.input.position..', '..variables.input.orientation..', '..variables.input.guess
-        elseif metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
+        elseif metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
             result_decl = 'const '.. asn1_types.joint_state.. ' *'..variables.input.q..', const '.. asn1_types.vector_3d ..' *'..variables.input.vector
             result_call = variables.input.q..', '..variables.input.vector
         end
@@ -37,7 +37,7 @@ local function generate_outputs(metadata, external)
     end
     if metadata.type == ilk_keywords.solver_type.forward then
         local counter = 0
-        for i,v in pairs(metadata.ops.outputs) do
+        for i,v in pairs(metadata.outputs) do
             if v.otype == 'pose' then
                 counter = counter + 1
                 result_decl = result_decl.. asn1_types.pose ..' '..variables.output.outval..counter..'; '
@@ -49,12 +49,12 @@ local function generate_outputs(metadata, external)
         result_para = result_para:sub(1, -2)
         result_call = result_call:sub(1, -2)
     elseif metadata.type == ilk_keywords.solver_type.inverse then
-        if metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
+        if metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
             result_decl = asn1_types.joint_state ..' '..variables.output.q_ik..';'
             result_para = asn1_types.joint_state ..' *'..variables.output.q_ik
             result_init = asn1_types.init.joint_state .. '('..variables.output.q_ik..');'
             result_call = variables.output.q_ik
-        elseif metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
+        elseif metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
             result_decl = asn1_types.joint_state.. ' '..variables.output.qd_ik..';'
             result_para = asn1_types.joint_state.. ' *'..variables.output.qd_ik
             result_init = asn1_types.init.joint_state .. '('..variables.output.qd_ik..');'
@@ -68,17 +68,17 @@ end
 local function generate_solver_signatures(metadata)
     local result_decl = ''
     local result_call = ''
-    local robot_name = metadata.ops.robot_name
+    local robot_name = metadata.robot_name
     local input_transformations = ''   -- asn to kul
     local output_transformations = ''  -- kul to asn
     result_call = result_call .. constants.mc_variable .. ','
-    if metadata.ops.type == ilk_keywords.solver_type.forward then
+    if metadata.type == ilk_keywords.solver_type.forward then
         result_decl = result_decl .. robot_name..'::'..constants.input_type..' '..variables.internal.input..'; '
         result_call = result_call .. ''..variables.internal.input..','
         input_transformations = input_transformations..
                 generate_transformation_code(asn1_types.joint_state, variables.input.joint_state, constants.input_type, variables.internal.input)
         local counter = 0
-        for i,v in pairs(metadata.ops.outputs) do
+        for i,v in pairs(metadata.outputs) do
             if v.otype == 'pose' then
                 counter = counter + 1
                 result_decl = result_decl .. constants.backend_namespace..'::'..constants.pose_type..' '..variables.internal.output..''..counter..'; '
@@ -98,8 +98,8 @@ local function generate_solver_signatures(metadata)
             end
         end
         result_call = result_call:sub(1, -2)
-    elseif metadata.ops.type == ilk_keywords.solver_type.inverse then
-        if metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
+    elseif metadata.type == ilk_keywords.solver_type.inverse then
+        if metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.position then
             result_decl = result_decl .. constants.backend_namespace..'::'..constants.ik_pos_cfg..' '..variables.internal.configuration..'; '
             result_decl = result_decl .. constants.backend_namespace..'::'..constants.position_type ..' '..variables.internal.desired_position..'; '
             result_decl = result_decl .. constants.backend_namespace..'::'..constants.orientation_type ..' '..variables.internal.desired_orientation..'; '
@@ -113,7 +113,7 @@ local function generate_solver_signatures(metadata)
                 generate_transformation_code(asn1_types.orientation, '(*'..variables.input.orientation..').', constants.orientation_type, variables.internal.desired_orientation)
             output_transformations = output_transformations..
                     transformations.generate_transformation_code(constants.input_type, variables.internal.q_ik, asn1_types.joint_state, variables.output.q_ik)
-        elseif metadata.ops.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
+        elseif metadata.ik.kind == ilk_keywords.op_argument.inverse_kinematics.kind.velocity then
             result_decl = result_decl .. robot_name .. '::' .. constants.input_type .. ' '..variables.internal.q..'; '
             result_decl = result_decl .. constants.backend_namespace..'::'..constants.velocity_linear_type ..' '..variables.internal.vector..'; '
             result_decl = result_decl .. robot_name .. '::' .. constants.input_type .. ' '..variables.internal.qd_ik..'; '

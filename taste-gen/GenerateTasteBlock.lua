@@ -45,8 +45,13 @@ model_constants = config.model_constants
 
 local metadata = config_reader.read_config("metadata.yml")
 local _, meta_first = next(metadata)
-metadata.robot_name = meta_first.ops.robot_name
+metadata.robot_name = meta_first.robot_name
 
+for k, func in pairs(solver_functions) do
+  if metadata[func.function_name] == nil then
+    error("Could not find metadata for solver '" .. func.function_name .. "'. Check your config file")
+  end
+end
 
 -- Create glue-code folder
 os.execute('mkdir -p '..outdir..'/'..taste_fnc_block)
