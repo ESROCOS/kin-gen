@@ -1,21 +1,38 @@
 #!/bin/sh
 
-rm -rf generated
+WD=`pwd`
+ILKGEN_DIR=$WD/generated
+CPPGEN_DIR=$WD/compiled
 
-rm -rf compiled
+rm -rf $ILKGEN_DIR
+rm -rf $CPPGEN_DIR
 
-GENERATION_ROOT=$KIN_GEN_ROOT/tests/generation
 SAMPLE_QUERIES=$KIN_GEN_ROOT/tests/sample-queries
 
+
 cd $KIN_GEN_ROOT
-./ilk-generator.sh --robot $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/sample_all/model/ur5.dtdsl --output-dir $GENERATION_ROOT/generated
+./ilk-generator.sh --kindsl $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/query-ur5-sample.yaml --output-dir $ILKGEN_DIR
 
-cd $KIN_GEN_ROOT/ilk-compiler
-./ilk-compiler.lua -b eigen --indir $GENERATION_ROOT/generated --outdir $GENERATION_ROOT/compiled
+if [ $? != 0 ]
+then
+    echo "The ILK-Generator failed, aborting"
+    exit 1
+else
+    echo "The ILK-Generator ran successfully"
+fi
 
-cd $GENERATION_ROOT/compiled
-make tests
+cd $KIN_GEN_ROOT
+./ilk-compiler.sh -b eigen $ILKGEN_DIR/ $CPPGEN_DIR/
 
-cp $SAMPLE_QUERIES/sample_all/fk-dataset.zip $GENERATION_ROOT/compiled/
-unzip fk-dataset.zip
-rm fk-dataset.zip
+if [ $? != 0 ]
+then
+    echo "The ILK-Compiler failed, aborting"
+    exit 1
+else
+    echo "The ILK-Compiler ran successfully"
+fi
+
+cd $CPPGEN_DIR
+rm -rf build && mkdir build && cd build && cmake -DBuildTests=ON ..
+make
+

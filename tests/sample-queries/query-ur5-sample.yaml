@@ -1,0 +1,40 @@
+robot: ur5
+
+solvers:
+
+- name: fk1
+  kind: sweeping
+  outputs:
+    poses:
+      - target: wrist_3
+        reference: base
+    jacs:
+      - target: wrist_3
+        reference: base
+      - target: wrist_3
+        reference: upper_arm
+
+- name: fk2
+  kind: sweeping
+  outputs:
+    poses:
+      - target: forearm
+        reference: base
+
+- name: ik1
+  kind: IK
+  level: velocity
+  cfgSpace: linear
+  frames:
+    target:    wrist_3
+    reference: base
+
+- name: ik2
+  kind: IK
+  level: position
+  cfgSpace: pose
+  frames:
+    target:    wrist_3
+    reference: base
+
+

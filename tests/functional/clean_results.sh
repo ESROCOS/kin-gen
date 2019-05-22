@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rm -rf report
+rm -rf report generated compiled
