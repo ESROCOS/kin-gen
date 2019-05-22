@@ -155,9 +155,9 @@ r_joint wr2 {
 }
 
 r_joint wr3 {
-    /* The origin of the frame is on the outermost surface of the disc (wrist3) */
-    /* Putting it on the contact surface with wrist2 would probably be more
-       intuitive, but the robot docs do not mention the required measures... */
+    // The origin of the frame is on the outermost surface of the disc (wrist3)
+    // Putting it on the contact surface with wrist2 would probably be more
+    //   intuitive, but the robot docs do not mention the required measures...
     ref_frame {
         translation = (0.0825, 0.0, 0.0)
         rotation    = (0.0, PI/2.0, 0.0)

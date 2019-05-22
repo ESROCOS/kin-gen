@@ -7,3 +7,9 @@
 [submodule "dconv"]
 	path = dconv
 	url = https://github.com/haianos/dconv-tool.git
+[submodule "robot-model-tools"]
+	path = robot-model-tools
+	url = https://github.com/mfrigerio17/robot-model-tools
+[submodule "ilk-generator"]
+	path = ilk-generator
+	url = https://github.com/mfrigerio17/ilk-generator

@@ -1,7 +1,6 @@
 #!/bin/sh
 
-REALROOT="$KIN_GEN_ROOT/ilk-generator/building/0build"
+export PYTHONPATH="$PYTHONPATH:$KIN_GEN_ROOT/robot-model-tools:$KIN_GEN_ROOT/ilk-generator"
 
-CP=`find $REALROOT/lib/ -name '*.jar' | tr '\n' ':'`
+$KIN_GEN_ROOT/ilk-generator/ilkgen.py $@
 
-java -Dlog4j.configuration=file:$REALROOT/log4j.cfg -cp "$CP":$REALROOT/bin/ eu.esrocos.kul.Main "$@"
