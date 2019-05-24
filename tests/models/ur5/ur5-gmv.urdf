@@ -1,48 +1,48 @@
 <robot name="ur5">
     <link name="world"/>
-    <link name="base_link">
+    <link name="base">
         <inertial>
             <origin xyz="0.0 0.0 0.025"/>
             <mass value="4.0"/>
             <inertia ixx="0.004433" iyy="0.004433" izz="0.0072" ixy="0.0" ixz="0.0" iyz="0.0"/>
         </inertial>
     </link>
-    <link name="shoulder_link">
+    <link name="shoulder">
         <inertial>
             <origin xyz="0.0 0.00193 -0.02561"/>
             <mass value="3.7"/>
             <inertia ixx="0.010267495893" iyy="0.010267495893"  izz="0.00666" ixy="0.0" ixz="0.0" iyz="0.0"/>
         </inertial>
     </link>
-    <link name="upper_arm_link">
+    <link name="upper_arm">
         <inertial>
             <origin xyz="0.0 -0.024201 0.2125"/>
             <mass value="8.393"/>
             <inertia ixx="0.225455473484" iyy="0.225455473484"  izz="0.012236994" ixy="0.0" ixz="0.0" iyz="0.0"/>
         </inertial>
     </link>
-    <link name="forearm_link">
+    <link name="forearm">
         <inertial>
             <origin xyz="0.0 0.0265 0.11993"/>
             <mass value="2.275"/>
             <inertia ixx="0.048305814011" iyy="0.048305814011" ixy="0.0" ixz="0.0" iyz="0.0" izz="0.00182"/>
         </inertial>
     </link>
-    <link name="wrist_1_link">
+    <link name="wrist_1">
         <inertial>
             <origin xyz="0.0 0.110949 0.01634"/>
             <mass value="1.219"/>
             <inertia ixx="0.00207991791803" iyy="0.00207991791803" ixy="0.0" ixz="0.0" iyz="0.0" izz="0.0012342375"/>
         </inertial>
     </link>
-    <link name="wrist_2_link">
+    <link name="wrist_2">
         <inertial>
             <origin xyz="0.0 0.0018 0.11099"/>
             <mass value="1.219"/>
             <inertia ixx="0.00207991791803" iyy="0.00207991791803" ixy="0.0" ixz="0.0" iyz="0.0" izz="0.0012342375"/>
         </inertial>
     </link>
-    <link name="wrist_3_link">
+    <link name="wrist_3">
         <inertial>
             <origin xyz="0.0 0.001159 0.0"/>
             <mass value="0.1879"/>
@@ -71,58 +71,58 @@
         </inertial>
     </link>
     <link name="tool0"/>
-    <link name="base"/>
+    <link name="base_dummy"/>
 
     <joint name="world_joint" type="fixed">
         <parent link="world"/>
-        <child link="base_link"/>
+        <child link="base"/>
         <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.01"/>
     </joint>
     <joint name="shoulder_pan_joint" type="revolute">
         <origin xyz="0.0 0.0 0.089159" rpy="0.0 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child  link="shoulder_link"/>
+        <parent link="base"/>
+        <child  link="shoulder"/>
         <limit effort="150.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 0 1"/>
     </joint>
     <joint name="shoulder_lift_joint" type="revolute">
         <origin xyz="0.0 0.13585 0.0" rpy="0.0 1.570796325 0.0"/>
-        <parent link="shoulder_link"/>
-        <child  link="upper_arm_link"/>
+        <parent link="shoulder"/>
+        <child  link="upper_arm"/>
         <limit effort="150.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 1 0"/>
     </joint>
     <joint name="elbow_joint" type="revolute">
         <origin xyz="0.0 -0.1197 0.425" rpy="0.0 0.0 0.0"/>
-        <parent link="upper_arm_link"/>
-        <child  link="forearm_link"/>
+        <parent link="upper_arm"/>
+        <child  link="forearm"/>
         <limit effort="150.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 1 0"/>
     </joint>
     <joint name="wrist_1_joint" type="revolute">
         <origin xyz="0.0 0.0 0.39225" rpy="0.0 1.570796325 0.0"/>
-        <parent link="forearm_link"/>
-        <child  link="wrist_1_link"/>
+        <parent link="forearm"/>
+        <child  link="wrist_1"/>
         <limit effort="28.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 1 0"/>
     </joint>
     <joint name="wrist_2_joint" type="revolute">
         <origin xyz="0.0 0.093 0.0" rpy="0.0 0.0 0.0"/>
-        <parent link="wrist_1_link"/>
-        <child  link="wrist_2_link"/>
+        <parent link="wrist_1"/>
+        <child  link="wrist_2"/>
         <limit effort="28.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 0 1"/>
     </joint>
     <joint name="wrist_3_joint" type="revolute">
         <origin xyz="0.0 0.0 0.09465" rpy="0.0 0.0 0.0"/>
-        <parent link="wrist_2_link"/>
-        <child  link="wrist_3_link"/>
+        <parent link="wrist_2"/>
+        <child  link="wrist_3"/>
         <limit effort="28.0" lower="-3.14159265" upper="3.14159265" velocity="0.5"/>
         <axis xyz="0 1 0"/>
     </joint>
     <joint name="plate_fixed_joint" type="fixed">
         <origin rpy="-1.570796325 0.0 0.0" xyz="0.0 0.0873 0.0"/>
-        <parent link="wrist_3_link"/>
+        <parent link="wrist_3"/>
         <child  link="plate_link"/>
     </joint>
     <joint name="cam_fixed_joint" type="fixed">
@@ -137,12 +137,12 @@
     </joint>
     <joint name="base_link-base_fixed_joint" type="fixed">
         <origin xyz="0.0 0.0 0.0" rpy="0 0 -3.14159265"/>
-        <parent link="base_link"/>
-        <child link="base"/>
+        <parent link="base"/>
+        <child link="base_dummy"/>
     </joint>
     <joint name="wrist_3_link-tool0_fixed_joint" type="fixed">
         <origin rpy="-1.570796325 0 0" xyz="0 0.0823 0"/>
-        <parent link="wrist_3_link"/>
+        <parent link="wrist_3"/>
         <child link="tool0"/>
     </joint>
 </robot>
