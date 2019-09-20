@@ -6,13 +6,21 @@ add_custom_target(submodules
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
 )
 
+# Fix for downloading antlr-generator-3.2.0-patch.jar from behind a proxy
+# (wget uses the proxy environment variables, but the Java download code doesn't)
+add_custom_target(proxyfix
+    COMMAND test ! $http_poxy || test ! $HTTP_PROXY || wget -O .antlr-generator-3.2.0-patch.jar http://download.itemis.com/antlr-generator-3.2.0-patch.jar
+    DEPENDS submodules
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/ilk-generator/building/ant
+)
+
 # This target triggers the actual building of the ilk-generator, by using the
 # local Makefile. Note the 'ALL' keyword, required to add this target to the
 # default cmake targets.
 #
 add_custom_target(localbuild ALL
     COMMAND make
-    DEPENDS submodules
+    DEPENDS submodules proxyfix
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/ilk-generator
 )
 
