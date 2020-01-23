@@ -24,6 +24,16 @@ export KIN_GEN_ROOT=<full absolute path to this folder>
 export PATH=$PATH:$KIN_GEN_ROOT
 ```
 
+## Citing the software
+Please refer to the following conference paper:
+
+Marco Frigerio, Enea Scioni, Pawel P. Pazderski and Herman Bruyninckx,
+*"Code Generation from Declarative Models of Robotics Solvers"*, in
+Third IEEE International Conference on Robotic Computing (IRC), 2019,
+pp. 369-372.
+
+Available [here](https://ieeexplore.ieee.org/document/8675586)
+
 # License
 
 Copyright © 2019-2020, KU Leuven Robotics Group
