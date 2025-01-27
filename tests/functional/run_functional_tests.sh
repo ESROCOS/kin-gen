@@ -13,7 +13,7 @@ FUNCTIONAL_ROOT=$KIN_GEN_ROOT/tests/functional
 SAMPLE_QUERIES=$KIN_GEN_ROOT/tests/sample-queries
 
 cd $KIN_GEN_ROOT
-./ilk-generator.sh --kindsl  $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/query-ur5-sample.yaml --output-dir $ILKGEN_DIR
+./ilk-generator.sh $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/query-ur5-sample.yaml --output-dir $ILKGEN_DIR
 if [ $? != 0 ]
 then
     echo "The ilk-generator failed, aborting"

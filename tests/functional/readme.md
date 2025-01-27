@@ -3,6 +3,11 @@
 This test runs the entire toolchain for a set of queries for the UR5 robot,
 compiles the generated C++ code and runs functional tests on it.
 
+## Prerequisites
+
+Install the Eigen backend of the ilk-compiler. See the readme file in
+`ilk-compiler/`.
+
 ## Execution
 1. Run the `run_functional_tests.sh` shell script.
 

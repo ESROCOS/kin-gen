@@ -8,10 +8,15 @@ MEMORY_ROOT=$KIN_GEN_ROOT/tests/memory
 SAMPLE_QUERIES=$KIN_GEN_ROOT/tests/sample-queries
 
 cd $KIN_GEN_ROOT
-./ilk-generator.sh --robot $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/sample_"$1"/model/ur5.dtdsl --output-dir $MEMORY_ROOT/generated
+./ilk-generator.sh $KIN_GEN_ROOT/tests/models/ur5/ur5-kul.kindsl --query $SAMPLE_QUERIES/sample_"$1"/model/ur5.dtdsl --output-dir $MEMORY_ROOT/generated
 
-cd $KIN_GEN_ROOT/ilk-compiler
-./ilk-compiler.lua -b eigen --indir $MEMORY_ROOT/generated --outdir $MEMORY_ROOT/compiled
+if [ $? -ne 0 ]; then
+    echo "Error, the ilk-generator failed"
+    exit 1
+fi
+
+cd $KIN_GEN_ROOT
+./ilk-compiler.sh -b eigen $MEMORY_ROOT/generated $MEMORY_ROOT/compiled
 
 cd $MEMORY_ROOT/compiled
 make ur5_"$1"_timing_dbg
