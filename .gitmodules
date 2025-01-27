@@ -3,7 +3,7 @@
 	url = https://github.com/ESROCOS/ilk-compiler.git
 [submodule "urdf2kindsl"]
 	path = urdf2kindsl
-	url = https://bitbucket.org/robcogenteam/urdf2kindsl.git
+	url = https://github.com/mfrigerio17/urdf2kindsl.git
 [submodule "dconv"]
 	path = dconv
 	url = https://github.com/haianos/dconv-tool.git
